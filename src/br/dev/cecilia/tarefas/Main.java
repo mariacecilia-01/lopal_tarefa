@@ -9,9 +9,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.text.Utilities;
+
 import br.dev.cecilia.tarefas.dao.FuncionarioDAO;
 import br.dev.cecilia.tarefas.model.Funcionario;
 import br.dev.cecilia.tarefas.model.Tarefa;
+import br.dev.cecilia.tarefas.ui.FrameFuncionario;
+import br.dev.cecilia.tarefas.ui.FrameListaFuncionario;
+import br.dev.cecilia.tarefas.utils.Utils;
 
 
 public class Main {
@@ -19,54 +24,11 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		List<Funcionario> funcionarios = new ArrayList<>();
-		List<String> frutas = new ArrayList<>();
-		List<Double> numeros = new ArrayList<>();
+		new FrameListaFuncionario();
 		
-		frutas.add("banana");
-		frutas.add("maçã");
-		frutas.add("abacaxi");
-		frutas.add("laranja");
-		
-		numeros.add(4.9);
-		numeros.add(12.78);
+//		new FrameFuncionario();
 		
 		
-		Funcionario funcionario = new Funcionario();
-		funcionario.setCodigo(4);
-		funcionario.setNome("Luzia Maravilha");
-		funcionario.setMatricula("9908765");
-		funcionario.setEmail("maraviluzia@email.com");
-		
-		Funcionario funcionario2 = new Funcionario();
-		funcionario2.setCodigo(5);
-		funcionario2.setNome("Rodolfo Cassagolfo");
-		funcionario2.setMatricula("22132244");
-		funcionario2.setEmail("cassagolfo@email.com");
-		
-		funcionarios.addAll(List.of(funcionario, funcionario2));
-		
-		
-		System.out.println(frutas);
-		System.out.println(funcionarios);
-		
-		for(Funcionario f : funcionarios) {
-			System.out.println(f.getNome() + " - " + f.getEmail());
-		}
-	
-		
-		
-//		Funcionario funcionario = new Funcionario();
-//		funcionario.setCodigo(4);
-//		funcionario.setNome("Luzia Maravilha");
-//		funcionario.setMatricula("9908765");
-//		funcionario.setEmail("maraviluzia@email.com");
-//		
-//		FuncionarioDAO dao = new FuncionarioDAO(funcionario);
-//		dao.gravar();
-//		
-//		System.out.println(funcionario.toString());
-				
 	}
 	
 	private static void gravarArquivo() {

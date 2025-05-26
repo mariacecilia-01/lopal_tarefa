@@ -2,16 +2,16 @@ package br.dev.cecilia.tarefas.model;
 
 public class Funcionario {
 	
-	private int codigo;
+	private String codigo;
 	private String nome;
-	private String matricula;
+	private String telefone;
 	private String email;
 	
-	public int getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 	
-	public void setCodigo(int codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 	
@@ -21,11 +21,11 @@ public class Funcionario {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getMatricula() {
-		return matricula;
+	public String getTelefone() {
+		return telefone;
 	}
-	public void setMatricula(String matricula) {
-		this.matricula = matricula;
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 	public String getEmail() {
 		return email;
@@ -36,7 +36,7 @@ public class Funcionario {
 	
 	@Override
 	public String toString() {
-		return this.codigo + "," + this.nome + "," + this.matricula + "," + this.email + "\n";
+		return this.codigo + "," + this.nome + "," + this.telefone + "," + this.email + "\n";
 	}
 	
 	
