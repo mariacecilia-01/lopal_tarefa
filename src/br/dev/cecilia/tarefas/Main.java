@@ -16,6 +16,8 @@ import br.dev.cecilia.tarefas.model.Funcionario;
 import br.dev.cecilia.tarefas.model.Tarefa;
 import br.dev.cecilia.tarefas.ui.FrameFuncionario;
 import br.dev.cecilia.tarefas.ui.FrameListaFuncionario;
+import br.dev.cecilia.tarefas.ui.Home;
+import br.dev.cecilia.tarefas.ui.FrameFuncionario;
 import br.dev.cecilia.tarefas.utils.Utils;
 
 
@@ -24,11 +26,12 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		new FrameListaFuncionario();
+//		new FrameListaFuncionario();
+		new Home();
 		
 //		new FrameFuncionario();
 		
-		
+
 	}
 	
 	private static void gravarArquivo() {
