@@ -44,24 +44,20 @@ public class Home {
 		
 		buttonTarefas = new JButton();
 		buttonTarefas.setBounds(260, 150, 200, 50);
-		buttonFuncionarios.setText("Tarefas");
-		buttonFuncionarios.setFont(fontButton);
+		buttonTarefas.setText("Tarefas");
+		buttonTarefas.setFont(fontButton);
 		
 		painel.add(labelTitulo);
 		painel.add(buttonFuncionarios);
 		painel.add(buttonTarefas);
 		
 		buttonFuncionarios.addActionListener(new ActionListener() {
-			
-			
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				buttonFuncionarios;
-				
-				
+				new FrameListaFuncionario();
+}
 			}
-		});
+		);
 		
 		
 		tela.setVisible(true);
