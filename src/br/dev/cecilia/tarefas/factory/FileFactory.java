@@ -15,6 +15,7 @@ public class FileFactory {
 	private BufferedReader br;
 
 	private String pathFuncionarios = "C:\\Users\\25132596\\tarefa\\funcionarios.csv";
+	private String pathTarefas = "C:\\Users\\25132596\\tarefa\\tarefas.csv";
 	
 	public BufferedReader getBufferedReader() throws FileNotFoundException, IOException {
 		fr = new FileReader(pathFuncionarios);
@@ -30,5 +31,17 @@ public class FileFactory {
 		return bw;
 
 	}
-
+	
+	public BufferedReader getBufferedReader2() throws FileNotFoundException, IOException {
+		fr = new FileReader(pathTarefas);
+		br = new BufferedReader(fr);
+		return br;
+	}
+	
+	public BufferedWriter getBufferedWriter2() throws FileNotFoundException, IOException{
+		fw = new FileWriter(pathTarefas, true);
+		bw = new BufferedWriter(fw);
+		return bw;
+	}
+	
 }

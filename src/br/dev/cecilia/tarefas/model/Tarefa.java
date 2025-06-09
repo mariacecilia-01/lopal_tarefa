@@ -17,8 +17,7 @@ public class Tarefa {
 			this.titulo = titulo;
 		}
 		
-		public Tarefa(String titulo, LocalDateTime dataInicial) {
-			
+		public Tarefa(String titulo, LocalDateTime dataInicial) {	
 		}
 		
 		public Tarefa(){}

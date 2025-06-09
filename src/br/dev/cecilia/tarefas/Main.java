@@ -16,6 +16,8 @@ import br.dev.cecilia.tarefas.model.Funcionario;
 import br.dev.cecilia.tarefas.model.Tarefa;
 import br.dev.cecilia.tarefas.ui.FrameFuncionario;
 import br.dev.cecilia.tarefas.ui.FrameListaFuncionario;
+import br.dev.cecilia.tarefas.ui.FrameListaTarefa;
+import br.dev.cecilia.tarefas.ui.FrameTarefa;
 import br.dev.cecilia.tarefas.ui.Home;
 import br.dev.cecilia.tarefas.ui.FrameFuncionario;
 import br.dev.cecilia.tarefas.utils.Utils;
@@ -26,31 +28,19 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-	//	new FrameListaFuncionario();
-		new Home();
-		
+//		new Home();
+//		new FrameListaTarefa();
+		new FrameTarefa();
+//		new FrameListaFuncionario();
 //		new FrameFuncionario();
+		
+		
 		
 
 	}
 	
-	private static void gravarArquivo() {
-		FileWriter arquivo = null;
-		BufferedWriter escritor = null;
-		
-		try {
-			
-			arquivo = new FileWriter(path, true);
-			escritor = new BufferedWriter(arquivo);
-			
-			escritor.write("Essa é a ultima linha, por enquanto!!!\n");
-			escritor.flush();
-			
-		} catch (Exception erro) {
-			System.out.println(erro.getMessage());
-		}
-		
-	}
+	
+
 
 	private static void lerArquivo() {
 		//Abrir o arquivo para leitura

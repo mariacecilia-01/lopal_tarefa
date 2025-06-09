@@ -21,8 +21,8 @@ public class FrameListaFuncionario {
 	private JTable tableFuncionarios;
 	private JScrollPane scrollFuncionarios;
 	private JButton btnNovo;
-	private JButton btnExcluir;
-	private JButton btnAlterar;
+//	private JButton btnExcluir;
+//	private JButton btnAlterar;
 	private JButton btnSair;
 	
 	private Font fontTitulo = new Font("Arial", Font.BOLD, 18);
@@ -75,17 +75,30 @@ public class FrameListaFuncionario {
 		
 		btnNovo.setBounds(10, 380, 150, 40);
 		
+		btnSair = new JButton("Sair");
+		btnSair.setBounds(170, 380, 150, 40);
+		
 		painel.add(labelTitulo);
 		painel.add(scrollFuncionarios);
 		painel.add(btnNovo);
+		painel.add(btnSair);
 		
 		btnNovo.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new FrameFuncionario(tela);
 			}
 		});
+		
+		btnSair.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tela.dispose();
+				
+			}
+		});
+		
+		
 		
 		tela.setVisible(true);
 		
