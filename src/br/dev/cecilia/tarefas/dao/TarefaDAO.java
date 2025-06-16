@@ -15,7 +15,6 @@ public class TarefaDAO {
 		
 	private Tarefa tarefa;
 	private FileFactory ff = new FileFactory();
-//	private Tarefa responsavel;
 	
 	public TarefaDAO (Tarefa tarefa) {
 		this.tarefa = tarefa;
@@ -33,6 +32,7 @@ public class TarefaDAO {
 		
 		public List<Tarefa> showTarefas(){
 			List<Tarefa> tarefas = new ArrayList<>();
+			FuncionarioDAO funcionario = new FuncionarioDAO(null);
 			
 			try {
 				BufferedReader br = ff.getBufferedReader();
@@ -41,12 +41,11 @@ public class TarefaDAO {
 				do {
 					linha = br.readLine();
 					String[] tarefa = linha != null ? linha.split(",") : null;
-//					responsavel = linha != null ? linha.split(",") : null;
 					
 					Tarefa t = new Tarefa();
 					t.setTitulo(tarefa[0]);
 					t.setDescricao(tarefa[1]);
-//					t.setResponsavel(responsavel[2]);
+					t.setResponsavel(funcionario.reconstruirFuncionario(tarefa[7], tarefa[8], tarefa[9], tarefa[10]));
 				
 					tarefas.add(t);
 					

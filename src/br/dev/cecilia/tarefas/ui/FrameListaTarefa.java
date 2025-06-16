@@ -14,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import br.dev.cecilia.tarefas.dao.TarefaDAO;
+import br.dev.cecilia.tarefas.model.Funcionario;
 import br.dev.cecilia.tarefas.model.Tarefa;
 
 public class FrameListaTarefa {
@@ -41,15 +42,11 @@ public class FrameListaTarefa {
 		
 		Container painel = tela.getContentPane();
 		
-		lblTarefaTitulo = new JLabel("Lista de Tarefas");
-		lblTarefaTitulo.setBounds(10, 20, 500, 30);
-		lblTarefaTitulo.setFont(fontTitulo);
-		
 		//criar tabela
 		String[] colunas = new String[3];
 		colunas[0] = "Código";
-		colunas[1] = "Nome da tarefa";
-		colunas[2] = "Responsável";
+		colunas[1] = "Tarefa";
+		colunas[2] = "Funcionário";
 
 		
 		TarefaDAO dao = new TarefaDAO(null);
@@ -60,11 +57,14 @@ public class FrameListaTarefa {
 		for (Tarefa t : tarefas) {
 			dados[linha][0] = t.getCodigo();
 			dados[linha][1] = t.getTitulo();
-			dados[linha][2] = t.getResponsavel();
+			Funcionario funcionario = t.getResponsavel();
+			dados[linha][2] = funcionario.getNome();
 			linha++;
 		}
 		
-		
+		lblTarefaTitulo = new JLabel("Lista de Tarefas");
+		lblTarefaTitulo.setBounds(10, 20, 500, 30);
+		lblTarefaTitulo.setFont(fontTitulo);
 		tblListaTarefas = new JTable(dados, colunas);
 		scrollLista = new JScrollPane(tblListaTarefas);
 		scrollLista.setBounds(10, 70, 500, 300);

@@ -14,6 +14,17 @@ public class FuncionarioDAO {
 	private Funcionario funcionario;
 	private FileFactory ff = new FileFactory();
 	
+	public Funcionario reconstruirFuncionario (String codigo, String nome, String telefone, String email) {
+		Funcionario funcionario = new Funcionario();
+		
+		funcionario.setCodigo(codigo);
+		funcionario.setNome(nome);
+		funcionario.setTelefone(telefone);
+		funcionario.setEmail(email);
+		
+		return funcionario;
+	}
+	
 	
 	//Método construtor
 	public FuncionarioDAO(Funcionario funcionario) {

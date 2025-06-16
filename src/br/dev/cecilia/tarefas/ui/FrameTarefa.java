@@ -9,10 +9,13 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import br.dev.cecilia.tarefas.dao.FuncionarioDAO;
 import br.dev.cecilia.tarefas.model.Funcionario;
+import br.dev.cecilia.tarefas.model.Tarefa;
+import br.dev.cecilia.tarefas.utils.Utils;
 
 public class FrameTarefa {
 	
@@ -95,6 +98,16 @@ public class FrameTarefa {
 		//precisa fazer salvar a tarefa e ir para a lista de tarefas que nem no funcionario
 		btnSalvar = new JButton("Salvar");
 		btnSalvar.setBounds(10, 445, 150, 50);
+		
+		btnSalvar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Tarefa tarefa = new Tarefa();
+				tarefa.setTitulo(txtTitulo.getText());
+				tarefa.setResponsavel(null);
+				
+			}
+		});
 		//
 		btnSair = new JButton("Sair");
 		btnSair.setBounds(170, 445, 150, 50);
