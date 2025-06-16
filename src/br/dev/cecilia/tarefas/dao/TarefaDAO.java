@@ -15,7 +15,7 @@ public class TarefaDAO {
 		
 	private Tarefa tarefa;
 	private FileFactory ff = new FileFactory();
-	private Funcionario funcionario = new Funcionario();
+//	private Tarefa responsavel;
 	
 	public TarefaDAO (Tarefa tarefa) {
 		this.tarefa = tarefa;
@@ -32,7 +32,6 @@ public class TarefaDAO {
 	}
 		
 		public List<Tarefa> showTarefas(){
-			
 			List<Tarefa> tarefas = new ArrayList<>();
 			
 			try {
@@ -42,13 +41,15 @@ public class TarefaDAO {
 				do {
 					linha = br.readLine();
 					String[] tarefa = linha != null ? linha.split(",") : null;
+//					responsavel = linha != null ? linha.split(",") : null;
 					
 					Tarefa t = new Tarefa();
 					t.setTitulo(tarefa[0]);
 					t.setDescricao(tarefa[1]);
-//					t.setResponsavel(funcionario[2]);
+//					t.setResponsavel(responsavel[2]);
 				
 					tarefas.add(t);
+					
 				} while(linha != null);
 			} catch (Exception e) {
 				System.out.println(e.getMessage()); 

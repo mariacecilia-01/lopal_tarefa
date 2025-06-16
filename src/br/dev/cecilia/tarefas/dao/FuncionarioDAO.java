@@ -34,7 +34,6 @@ public class FuncionarioDAO {
 	}
 	
 	public List<Funcionario> showEmployees(){
-		
 		List<Funcionario> funcionarios = new ArrayList<>();
 		
 		try {

@@ -28,9 +28,9 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-//		new Home();
+		new Home();
 //		new FrameListaTarefa();
-		new FrameTarefa();
+//		new FrameTarefa();
 //		new FrameListaFuncionario();
 //		new FrameFuncionario();
 		
