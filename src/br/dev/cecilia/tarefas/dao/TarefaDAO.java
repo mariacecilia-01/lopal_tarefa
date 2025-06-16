@@ -12,51 +12,50 @@ import br.dev.cecilia.tarefas.model.Funcionario;
 import br.dev.cecilia.tarefas.model.Tarefa;
 
 public class TarefaDAO {
-		
+
 	private Tarefa tarefa;
 	private FileFactory ff = new FileFactory();
-	
-	public TarefaDAO (Tarefa tarefa) {
+
+	public TarefaDAO(Tarefa tarefa) {
 		this.tarefa = tarefa;
 	}
-	
+
 	public void gravar() {
-		
+
 		try {
 			BufferedWriter bw = ff.getBufferedWriter();
 			bw.write(tarefa.toString());
 			bw.flush();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());}
+			System.out.println(e.getMessage());
+		}
 	}
-		
-		public List<Tarefa> showTarefas(){
-			List<Tarefa> tarefas = new ArrayList<>();
-			FuncionarioDAO funcionario = new FuncionarioDAO(null);
-			
-			try {
-				BufferedReader br = ff.getBufferedReader();
-				String linha = null;
-				linha = br.readLine();
-				do {
-					linha = br.readLine();
-					String[] tarefa = linha != null ? linha.split(",") : null;
-					
-					Tarefa t = new Tarefa();
-					t.setTitulo(tarefa[0]);
-					t.setDescricao(tarefa[1]);
-					t.setResponsavel(funcionario.reconstruirFuncionario(tarefa[7], tarefa[8], tarefa[9], tarefa[10]));
-				
-					tarefas.add(t);
-					
-				} while(linha != null);
-			} catch (Exception e) {
-				System.out.println(e.getMessage()); 
-			
-		}
-			return tarefas;
-		
 
-	
+	public List<Tarefa> showTarefas() {
+		List<Tarefa> tarefas = new ArrayList<>();
+		FuncionarioDAO funcionario = new FuncionarioDAO(null);
+
+		try {
+			BufferedReader br = ff.getBufferedReader();
+			String linha = null;
+			linha = br.readLine();
+			do {
+				linha = br.readLine();
+				String[] tarefa = linha != null ? linha.split(",") : null;
+
+				Tarefa t = new Tarefa();
+				t.setTitulo(tarefa[0]);
+				t.setDescricao(tarefa[1]);
+				t.setResponsavel(funcionario.reconstruirFuncionario(tarefa[7], tarefa[8], tarefa[9], tarefa[10]));
+
+				tarefas.add(t);
+
+			} while (linha != null);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+
 		}
+		return tarefas;
+
+	}
 }

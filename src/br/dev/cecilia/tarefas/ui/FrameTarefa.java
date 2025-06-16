@@ -3,6 +3,7 @@ package br.dev.cecilia.tarefas.ui;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -13,12 +14,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import br.dev.cecilia.tarefas.dao.FuncionarioDAO;
+import br.dev.cecilia.tarefas.dao.TarefaDAO;
 import br.dev.cecilia.tarefas.model.Funcionario;
+import br.dev.cecilia.tarefas.model.Status;
 import br.dev.cecilia.tarefas.model.Tarefa;
 import br.dev.cecilia.tarefas.utils.Utils;
 
 public class FrameTarefa {
-	
+
 	JLabel lblTitulo;
 	JTextField txtTitulo;
 	JLabel lblDescricao;
@@ -35,12 +38,12 @@ public class FrameTarefa {
 	JComboBox<String> boxFuncionario;
 	JButton btnSalvar;
 	JButton btnSair;
-	
+
 	public FrameTarefa() {
 		criarTela();
 	}
-	
-	private void criarTela(){
+
+	private void criarTela() {
 		JFrame tela = new JFrame();
 		tela.setTitle("Cadastro de Tarefas");
 		tela.setSize(400, 600);
@@ -48,35 +51,35 @@ public class FrameTarefa {
 		tela.setResizable(false);
 		tela.setLayout(null);
 		tela.setLocationRelativeTo(null);
-		
+
 		Container painel = tela.getContentPane();
-		
+
 		lblTitulo = new JLabel("Título");
 		lblTitulo.setBounds(10, 10, 50, 50);
 		txtTitulo = new JTextField();
 		txtTitulo.setBounds(10, 50, 250, 35);
-		
+
 		lblDescricao = new JLabel("Descrição da tarefa");
 		lblDescricao.setBounds(10, 80, 150, 50);
 		txtDescricao = new JTextField();
 		txtDescricao.setBounds(10, 120, 250, 35);
-		
+
 		lblDataInicial = new JLabel("Data de início");
 		lblDataInicial.setBounds(10, 150, 150, 50);
 		txtDataInicial = new JTextField();
 		txtDataInicial.setBounds(10, 190, 250, 35);
-		
+
 		lblPrazo = new JLabel("Prazo");
 		lblPrazo.setBounds(10, 220, 150, 50);
 		txtPrazo = new JTextField();
 		txtPrazo.setBounds(10, 260, 250, 35);
-		
+
 		lblConclusao = new JLabel("Data de conclusão");
 		lblConclusao.setBounds(10, 290, 150, 50);
 		txtConclusao = new JTextField();
 		txtConclusao.setBounds(10, 330, 250, 35);
-		
-		lblStatus= new JLabel("Status");
+
+		lblStatus = new JLabel("Status");
 		lblStatus.setBounds(10, 360, 150, 50);
 		boxStatus = new JComboBox<String>();
 		boxStatus.setBounds(10, 400, 130, 30);
@@ -84,43 +87,72 @@ public class FrameTarefa {
 		boxStatus.addItem("EM_ANDAMENTO");
 		boxStatus.addItem("FINALIZADA");
 		boxStatus.addItem("EM_ATRASO");
-		
+
 		lblFuncionario = new JLabel("Funcionário");
 		lblFuncionario.setBounds(170, 360, 150, 50);
 		boxFuncionario = new JComboBox<String>();
 		boxFuncionario.setBounds(160, 400, 150, 30);
+		
 		FuncionarioDAO dao = new FuncionarioDAO(null);
 		List<Funcionario> funcionarios = dao.showEmployees();
 		for (Funcionario f : funcionarios) {
 			boxFuncionario.addItem(f.getNome());
 		}
-		
-		//precisa fazer salvar a tarefa e ir para a lista de tarefas que nem no funcionario
+
+		// precisa fazer salvar a tarefa e ir para a lista de tarefas que nem no
+		// funcionario
 		btnSalvar = new JButton("Salvar");
 		btnSalvar.setBounds(10, 445, 150, 50);
-		
+
 		btnSalvar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Tarefa tarefa = new Tarefa();
+				tarefa.setCodigo(Utils.gerarUUID());
 				tarefa.setTitulo(txtTitulo.getText());
-				tarefa.setResponsavel(null);
-				
+				tarefa.setDescricao(txtDescricao.getText());
+				String[] dadosDataInicio = txtDataInicial.getText().split("/");
+				LocalDate dataInicio = LocalDate.now();
+				dataInicio = dataInicio.withYear(Integer.valueOf(dadosDataInicio[2]))
+						.withMonth(Integer.valueOf(dadosDataInicio[1]))
+						.withDayOfMonth(Integer.valueOf(dadosDataInicio[0]));
+				tarefa.setDataInicial(dataInicio);
+				String[] dadosDataFinal = txtConclusao.getText().split("/");
+				LocalDate dataFinal = LocalDate.now();
+				dataFinal = dataInicio.withYear(Integer.valueOf(dadosDataFinal[2]))
+						.withMonth(Integer.valueOf(dadosDataFinal[1]))
+						.withDayOfMonth(Integer.valueOf(dadosDataFinal[0]));
+				tarefa.setDataConclusao(dataFinal);
+				tarefa.setPrazo(Integer.valueOf(txtPrazo.getText()));
+				tarefa.setStatus((Status) boxStatus.getSelectedItem());
+				String nome;
+				String nomeSelecionado;
+				List<Funcionario> funcionarios = dao.showEmployees();
+				for (Funcionario funcionario : funcionarios) {
+					nome = funcionario.getNome();
+					nomeSelecionado = String.valueOf(boxFuncionario.getSelectedItem());
+					if (nomeSelecionado.equals(nome)){
+						tarefa.setResponsavel(funcionario);
+						TarefaDAO tDao = new TarefaDAO(tarefa);
+						tDao.gravar();
+					}
+				}
+
 			}
 		});
 		//
+
 		btnSair = new JButton("Sair");
 		btnSair.setBounds(170, 445, 150, 50);
-		
+
 		btnSair.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				tela.dispose();
 			}
 		});
-		
-		
+
 		painel.add(lblTitulo);
 		painel.add(txtTitulo);
 		painel.add(lblDescricao);
@@ -137,8 +169,7 @@ public class FrameTarefa {
 		painel.add(boxFuncionario);
 		painel.add(btnSalvar);
 		painel.add(btnSair);
-		
-		
+
 		tela.setVisible(true);
 	}
 
